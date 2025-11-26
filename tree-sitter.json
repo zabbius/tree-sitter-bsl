@@ -21,10 +21,13 @@
     "authors": [
       {
         "name": "alkoleft"
+      },
+      {
+        "name": "zabbius"
       }
     ],
     "links": {
-      "repository": "https://github.com/alkoleft/tree-sitter-bsl"
+      "repository": "https://github.com/zabbius/tree-sitter-bsl"
     }
   },
   "bindings": {
