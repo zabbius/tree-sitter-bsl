@@ -68,6 +68,9 @@ const CORE_KEYWORDS = [
   ['добавитьобработчик', 'addhandler'],
   ['удалитьобработчик', 'removehandler'],
 
+  //Execute
+  ['выполнить', 'execute'],
+
   // Operators
   ['и', 'and'],
   ['или', 'or'],
@@ -362,8 +365,8 @@ module.exports = grammar({
     break_statement: ($) => seq($.BREAK_KEYWORD, optional(';')),
 
     execute_statement: ($) => choice(
-      seq(keyword('выполнить', 'execute'), $.expression, optional(';')),
-      seq(keyword('выполнить', 'execute'), '(', $.expression, ')', optional(';')),
+      seq($.EXECUTE_KEYWORD, $.expression, optional(';')),
+      seq($.EXECUTE_KEYWORD, '(', $.expression, ')', optional(';')),
     ),
 
     goto_statement: ($) =>
