@@ -364,8 +364,8 @@ module.exports = grammar({
     break_statement: ($) => seq($.BREAK_KEYWORD, optional(';')),
 
     execute_statement: ($) => choice(
-        seq($.EXECUTE_KEYWORD, '(', $.expression, ')', optional(';')),
-        seq($.EXECUTE_KEYWORD, $.expression, optional(';'))
+      seq($.EXECUTE_KEYWORD, '(', $.expression, ')', optional(';')),
+      seq($.EXECUTE_KEYWORD, $.expression, optional(';')),
     ),
 
     goto_statement: ($) => seq($.GOTO_KEYWORD, '~', $.identifier, optional(';')),
@@ -402,18 +402,18 @@ module.exports = grammar({
       ),
 
     ...{
-        OP_ADD: ($) => '+',
-        OP_SUB: ($) => '-',
-        OP_MUL: ($) => '*',
-        OP_DIV: ($) => '/',
-        OP_MOD: ($) => '%',
+      OP_ADD: ($) => '+',
+      OP_SUB: ($) => '-',
+      OP_MUL: ($) => '*',
+      OP_DIV: ($) => '/',
+      OP_MOD: ($) => '%',
 
-        OP_EQ: ($) => '=',
-        OP_NE: ($) => '<>',
-        OP_LT: ($) => '<',
-        OP_LT_EQ: ($) => '<=',
-        OP_GT: ($) => '>',
-        OP_GT_EQ: ($) => '>=',
+      OP_EQ: ($) => '=',
+      OP_NE: ($) => '<>',
+      OP_LT: ($) => '<',
+      OP_LT_EQ: ($) => '<=',
+      OP_GT: ($) => '>',
+      OP_GT_EQ: ($) => '>=',
     },
 
     unary_expression: ($) =>
