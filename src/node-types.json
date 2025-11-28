@@ -1,5 +1,10 @@
 [
   {
+    "type": "OP_EQ",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "access",
     "named": true,
     "fields": {},
@@ -147,7 +152,55 @@
         "required": true,
         "types": [
           {
-            "type": "operator",
+            "type": "AND_KEYWORD",
+            "named": true
+          },
+          {
+            "type": "OP_ADD",
+            "named": true
+          },
+          {
+            "type": "OP_DIV",
+            "named": true
+          },
+          {
+            "type": "OP_EQ",
+            "named": true
+          },
+          {
+            "type": "OP_GT",
+            "named": true
+          },
+          {
+            "type": "OP_GT_EQ",
+            "named": true
+          },
+          {
+            "type": "OP_LT",
+            "named": true
+          },
+          {
+            "type": "OP_LT_EQ",
+            "named": true
+          },
+          {
+            "type": "OP_MOD",
+            "named": true
+          },
+          {
+            "type": "OP_MUL",
+            "named": true
+          },
+          {
+            "type": "OP_NE",
+            "named": true
+          },
+          {
+            "type": "OP_SUB",
+            "named": true
+          },
+          {
+            "type": "OR_KEYWORD",
             "named": true
           }
         ]
@@ -481,9 +534,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "EXECUTE_KEYWORD",
+          "named": true
+        },
         {
           "type": "expression",
           "named": true
@@ -1105,6 +1162,7 @@
   {
     "type": "line_comment",
     "named": true,
+    "extra": true,
     "fields": {}
   },
   {
@@ -1826,7 +1884,15 @@
         "required": true,
         "types": [
           {
-            "type": "operator",
+            "type": "NOT_KEYWORD",
+            "named": true
+          },
+          {
+            "type": "OP_ADD",
+            "named": true
+          },
+          {
+            "type": "OP_SUB",
             "named": true
           }
         ]
@@ -2043,6 +2109,10 @@
     "named": true
   },
   {
+    "type": "AND_KEYWORD",
+    "named": true
+  },
+  {
     "type": "ASYNC_KEYWORD",
     "named": true
   },
@@ -2099,6 +2169,10 @@
     "named": true
   },
   {
+    "type": "EXECUTE_KEYWORD",
+    "named": true
+  },
+  {
     "type": "EXPORT_KEYWORD",
     "named": true
   },
@@ -2131,7 +2205,55 @@
     "named": true
   },
   {
+    "type": "NOT_KEYWORD",
+    "named": true
+  },
+  {
     "type": "NULL_KEYWORD",
+    "named": true
+  },
+  {
+    "type": "OP_ADD",
+    "named": true
+  },
+  {
+    "type": "OP_DIV",
+    "named": true
+  },
+  {
+    "type": "OP_GT",
+    "named": true
+  },
+  {
+    "type": "OP_GT_EQ",
+    "named": true
+  },
+  {
+    "type": "OP_LT",
+    "named": true
+  },
+  {
+    "type": "OP_LT_EQ",
+    "named": true
+  },
+  {
+    "type": "OP_MOD",
+    "named": true
+  },
+  {
+    "type": "OP_MUL",
+    "named": true
+  },
+  {
+    "type": "OP_NE",
+    "named": true
+  },
+  {
+    "type": "OP_SUB",
+    "named": true
+  },
+  {
+    "type": "OR_KEYWORD",
     "named": true
   },
   {
@@ -2228,10 +2350,6 @@
   },
   {
     "type": "number",
-    "named": true
-  },
-  {
-    "type": "operator",
     "named": true
   },
   {

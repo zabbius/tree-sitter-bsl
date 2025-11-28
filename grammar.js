@@ -68,8 +68,6 @@ const CORE_KEYWORDS = [
   ['добавитьобработчик', 'addhandler'],
   ['удалитьобработчик', 'removehandler'],
 
-  //Execute
-  ['выполнить', 'execute'],
 
   // Operators
   ['и', 'and'],
@@ -89,6 +87,7 @@ const PREPROC_KEYWORDS = [
 /**
  * Формирует правила для ключевых слов
  */
+
 function buildKeywords() {
   const kw = {};
   for (const [rus, eng] of CORE_KEYWORDS) {
@@ -365,12 +364,11 @@ module.exports = grammar({
     break_statement: ($) => seq($.BREAK_KEYWORD, optional(';')),
 
     execute_statement: ($) => choice(
-      seq($.EXECUTE_KEYWORD, $.expression, optional(';')),
-      seq($.EXECUTE_KEYWORD, '(', $.expression, ')', optional(';')),
+        seq($.EXECUTE_KEYWORD, '(', $.expression, ')', optional(';')),
+        seq($.EXECUTE_KEYWORD, $.expression, optional(';'))
     ),
 
-    goto_statement: ($) =>
-      seq($.GOTO_KEYWORD, '~', $.identifier, optional(';')),
+    goto_statement: ($) => seq($.GOTO_KEYWORD, '~', $.identifier, optional(';')),
 
     label_statement: ($) => seq('~', $.identifier, ':', optional(';')),
 
@@ -403,11 +401,26 @@ module.exports = grammar({
         $.await_expression,
       ),
 
+    ...{
+        OP_ADD: ($) => '+',
+        OP_SUB: ($) => '-',
+        OP_MUL: ($) => '*',
+        OP_DIV: ($) => '/',
+        OP_MOD: ($) => '%',
+
+        OP_EQ: ($) => '=',
+        OP_NE: ($) => '<>',
+        OP_LT: ($) => '<',
+        OP_LT_EQ: ($) => '<=',
+        OP_GT: ($) => '>',
+        OP_GT_EQ: ($) => '>=',
+    },
+
     unary_expression: ($) =>
       prec.left(
         PREC.UNARY,
         seq(
-          field('operator', alias(choice('-', '+', $.NOT_KEYWORD), $.operator)),
+          field('operator', choice($.OP_ADD, $.OP_SUB, $.NOT_KEYWORD)),
           field('argument', $.expression),
         ),
       ),
@@ -416,9 +429,9 @@ module.exports = grammar({
       const operations = [
         [PREC.LOGICAL_AND, $.AND_KEYWORD],
         [PREC.LOGICAL_OR, $.OR_KEYWORD],
-        [PREC.COMPARISON, choice('<>', '=', '>', '<', '>=', '<=')],
-        [PREC.ADDITIVE, choice('+', '-')],
-        [PREC.MULTIPLICATIVE, choice('*', '/', '%')],
+        [PREC.COMPARISON, choice($.OP_EQ, $.OP_NE, $.OP_LT, $.OP_LT_EQ, $.OP_GT, $.OP_GT_EQ)],
+        [PREC.ADDITIVE, choice($.OP_ADD, $.OP_SUB)],
+        [PREC.MULTIPLICATIVE, choice($.OP_MUL, $.OP_DIV, $.OP_MOD)],
       ];
 
       return choice(
@@ -427,7 +440,7 @@ module.exports = grammar({
             priority,
             seq(
               field('left', $.expression),
-              field('operator', alias(operator, $.operator)),
+              field('operator', operator),
               field('right', $.expression),
             ),
           );
@@ -498,6 +511,8 @@ module.exports = grammar({
     // Primitive
     ...buildKeywords(),
     ...Preprocessor,
+
+    EXECUTE_KEYWORD: ($) => keyword('выполнить', 'execute'),
 
     _const_value: ($) =>
       choice(

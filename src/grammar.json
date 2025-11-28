@@ -945,26 +945,20 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "TOKEN",
-              "content": {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "PATTERN",
-                    "value": "выполнить",
-                    "flags": "i"
-                  },
-                  {
-                    "type": "PATTERN",
-                    "value": "execute",
-                    "flags": "i"
-                  }
-                ]
-              }
+              "type": "SYMBOL",
+              "name": "EXECUTE_KEYWORD"
+            },
+            {
+              "type": "STRING",
+              "value": "("
             },
             {
               "type": "SYMBOL",
               "name": "expression"
+            },
+            {
+              "type": "STRING",
+              "value": ")"
             },
             {
               "type": "CHOICE",
@@ -984,34 +978,12 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "TOKEN",
-              "content": {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "PATTERN",
-                    "value": "выполнить",
-                    "flags": "i"
-                  },
-                  {
-                    "type": "PATTERN",
-                    "value": "execute",
-                    "flags": "i"
-                  }
-                ]
-              }
-            },
-            {
-              "type": "STRING",
-              "value": "("
+              "type": "SYMBOL",
+              "name": "EXECUTE_KEYWORD"
             },
             {
               "type": "SYMBOL",
               "name": "expression"
-            },
-            {
-              "type": "STRING",
-              "value": ")"
             },
             {
               "type": "CHOICE",
@@ -1228,6 +1200,50 @@
         }
       ]
     },
+    "OP_ADD": {
+      "type": "STRING",
+      "value": "+"
+    },
+    "OP_SUB": {
+      "type": "STRING",
+      "value": "-"
+    },
+    "OP_MUL": {
+      "type": "STRING",
+      "value": "*"
+    },
+    "OP_DIV": {
+      "type": "STRING",
+      "value": "/"
+    },
+    "OP_MOD": {
+      "type": "STRING",
+      "value": "%"
+    },
+    "OP_EQ": {
+      "type": "STRING",
+      "value": "="
+    },
+    "OP_NE": {
+      "type": "STRING",
+      "value": "<>"
+    },
+    "OP_LT": {
+      "type": "STRING",
+      "value": "<"
+    },
+    "OP_LT_EQ": {
+      "type": "STRING",
+      "value": "<="
+    },
+    "OP_GT": {
+      "type": "STRING",
+      "value": ">"
+    },
+    "OP_GT_EQ": {
+      "type": "STRING",
+      "value": ">="
+    },
     "unary_expression": {
       "type": "PREC_LEFT",
       "value": 16,
@@ -1238,26 +1254,21 @@
             "type": "FIELD",
             "name": "operator",
             "content": {
-              "type": "ALIAS",
-              "content": {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "-"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "+"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "NOT_KEYWORD"
-                  }
-                ]
-              },
-              "named": true,
-              "value": "operator"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "OP_ADD"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "OP_SUB"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "NOT_KEYWORD"
+                }
+              ]
             }
           },
           {
@@ -1292,13 +1303,8 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "AND_KEYWORD"
-                  },
-                  "named": true,
-                  "value": "operator"
+                  "type": "SYMBOL",
+                  "name": "AND_KEYWORD"
                 }
               },
               {
@@ -1330,13 +1336,8 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "OR_KEYWORD"
-                  },
-                  "named": true,
-                  "value": "operator"
+                  "type": "SYMBOL",
+                  "name": "OR_KEYWORD"
                 }
               },
               {
@@ -1368,38 +1369,33 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "STRING",
-                        "value": "<>"
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "="
-                      },
-                      {
-                        "type": "STRING",
-                        "value": ">"
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "<"
-                      },
-                      {
-                        "type": "STRING",
-                        "value": ">="
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "<="
-                      }
-                    ]
-                  },
-                  "named": true,
-                  "value": "operator"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "OP_EQ"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "OP_NE"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "OP_LT"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "OP_LT_EQ"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "OP_GT"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "OP_GT_EQ"
+                    }
+                  ]
                 }
               },
               {
@@ -1431,22 +1427,17 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "STRING",
-                        "value": "+"
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "-"
-                      }
-                    ]
-                  },
-                  "named": true,
-                  "value": "operator"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "OP_ADD"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "OP_SUB"
+                    }
+                  ]
                 }
               },
               {
@@ -1478,26 +1469,21 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "STRING",
-                        "value": "*"
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "/"
-                      },
-                      {
-                        "type": "STRING",
-                        "value": "%"
-                      }
-                    ]
-                  },
-                  "named": true,
-                  "value": "operator"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "OP_MUL"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "OP_DIV"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "OP_MOD"
+                    }
+                  ]
                 }
               },
               {
@@ -3226,6 +3212,24 @@
           "value": "annotation"
         }
       ]
+    },
+    "EXECUTE_KEYWORD": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "выполнить",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "execute",
+            "flags": "i"
+          }
+        ]
+      }
     },
     "_const_value": {
       "type": "CHOICE",
